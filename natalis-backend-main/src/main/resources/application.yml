@@ -1,0 +1,20 @@
+
+
+
+
+# deployment
+
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: natalis_backend
+
+  mongodb:
+    uri: ${MONGO_URI}
+    auto-index-creation: true
+
+google:
+  client-id: ${GOOGLE_CLIENT_ID}
+
