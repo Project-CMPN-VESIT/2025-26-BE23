@@ -1,0 +1,183 @@
+---
+
+## 🌍 **Project Overview**
+
+**Title:** Natalis – Prenatal Imaging Interpretation System
+**Team:** Ved Waje, Abhirat More, Pranita Bannore, Harshita Lohana
+**Mentor:** Mrs. Vidya Zope
+**Institution:** Vivekanand Education Society’s Institute of Technology (VESIT)
+**Department:** Computer Engineering
+**Academic Year:** 2025–26, Semester VII
+
+### **Objective**
+
+Natalis aims to **democratize prenatal ultrasound screening** by using **AI-powered image interpretation** on a **smartphone-based offline platform**. It bridges the maternal health gap in **low-resource regions**, where limited equipment, lack of skilled sonographers, and unreliable power or internet contribute to preventable maternal and neonatal deaths.
+
+---
+
+## 🩺 **Background and Motivation**
+
+In 2017, approximately **295,000 women died from preventable pregnancy-related causes**, with **99% in low-income countries**. Timely **ultrasound screening** could prevent many of these deaths by identifying complications like:
+
+* **Placenta previa**
+* **Multiple gestations**
+* **Fetal growth restriction**
+* **Preeclampsia**
+
+The **World Health Organization (WHO)** recommends **at least one ultrasound scan before 24 weeks of gestation**, but up to **50% of women in developing countries never receive one** due to a lack of affordable, accessible, and interpretable ultrasound options.
+
+Existing solutions like **BabyChecker** and **DeepEcho** show that AI can empower minimally trained health workers to perform ultrasound scans using smartphone guidance. However, these systems remain limited by dependency on connectivity, expensive hardware, or region-specific datasets.
+
+---
+
+## ⚙️ **Problem Statement**
+
+Maternal and neonatal deaths persist because:
+
+1. **Access Gaps:** Lack of affordable ultrasound devices and trained professionals.
+2. **Infrastructure Limitations:** Poor power supply and internet availability.
+3. **Skill Barriers:** Frontline health workers are often untrained in ultrasound interpretation.
+4. **Data Limitations:** Models must function on **image-only inputs** without additional sensors or metadata.
+
+Thus, a system is needed that can:
+
+* Analyze **pre-recorded ultrasound videos or images**
+* Operate **completely offline**
+* Guide **non-experts**
+* Provide **automated diagnostic metrics** with high accuracy
+
+---
+
+## 💡 **Proposed Solution: Natalis**
+
+**Natalis** is an **Android-based AI tool** designed to interpret ultrasound images and videos without internet access. It provides **automated obstetric assessments** for low-resource environments using deep learning models.
+
+### **Core Features**
+
+1. **Offline AI Inference** – Runs entirely on-device without internet connectivity.
+2. **Video and Image Analysis** – Supports both ultrasound image sets and short sweep videos.
+3. **Multi-Task Diagnostic Pipeline:**
+
+   * **Gestational Age (GA) Estimation:** Calculates fetal biometric parameters (head circumference, femur length, abdominal circumference) with ±1–2 weeks accuracy.
+   * **Fetal Presentation Detection:** Determines orientation (cephalic/breech).
+   * **Placental Location Identification:** Segments placenta to detect anterior/posterior positioning or low-lying placenta.
+   * **Fetus Counting:** Identifies multiple gestations (twins, triplets) via fetal skull detection.
+4. **Clear Visual Interface:** Summarized report with icons, colored risk flags, multilingual support, and minimal technical text.
+
+---
+
+## 🔬 **Methodology**
+
+### **1. Data Collection & Preprocessing**
+
+* Datasets sourced from **open fetal ultrasound repositories** and partner clinics.
+* Focus on **second-trimester** scans (14–28 weeks) for clear fetal anatomy.
+* **Preprocessing pipeline:**
+
+  * Extract frames from videos.
+  * Resize (e.g., 256×256), normalize brightness/contrast.
+  * Apply data augmentation (rotation, flipping, noise).
+  * Filter out low-quality or irrelevant frames.
+
+### **2. Model Architecture**
+
+Multiple deep learning models are trained for specialized diagnostic functions:
+
+| Task                     | Model            | Objective                                          |
+| ------------------------ | ---------------- | -------------------------------------------------- |
+| Standard Plane Selection | **ResNet (CNN)** | Identify relevant frames (head, abdomen, femur)    |
+| Biometric Measurement    | **U-Net**        | Segment fetal structures for geometric measurement |
+| Orientation & Counting   | **YOLOv5**       | Detect fetal skulls and classify cephalic/breech   |
+| Placenta Segmentation    | **Custom U-Net** | Identify placental tissue and flag abnormalities   |
+
+Models are trained using **supervised learning** with **GPU acceleration (NVIDIA RTX)** and **transfer learning** for faster convergence.
+All models are converted to **TensorFlow Lite** or **PyTorch Mobile** for Android deployment.
+
+---
+
+## 🧱 **System Architecture**
+
+### **High-Level Workflow**
+
+1. **Input:** Pre-recorded ultrasound image/video from device storage.
+2. **AI Engine:**
+
+   * Frame extraction and preprocessing.
+   * Sequential inference using CNN, U-Net, YOLOv5 pipelines.
+3. **Computation:**
+
+   * Fetal biometry → GA calculation.
+   * Object detection → presentation & count.
+   * Segmentation → placenta mapping.
+4. **Output Dashboard:**
+
+   * Displays GA, fetal position, placental location, fetus count.
+   * Alerts for anomalies (e.g., “Possible placenta previa”).
+   * Saves key frames for record keeping.
+
+### **Hardware/Software Requirements**
+
+| Component        | Specification                            |
+| ---------------- | ---------------------------------------- |
+| Smartphone       | Android 8+ with CPU/GPU and ≥3GB RAM     |
+| Training Machine | GPU-enabled laptop/desktop (RTX series)  |
+| Libraries        | PyTorch, TensorFlow/Keras, OpenCV, NumPy |
+| Mobile Framework | Android Studio (Java/Kotlin)             |
+| Annotation Tools | LabelImg or custom GUI                   |
+| Version Control  | Git/GitHub                               |
+| Visualization    | TensorBoard                              |
+
+---
+
+## 🧪 **Evaluation Metrics**
+
+To ensure reliability and clinical relevance:
+
+| Metric                    | Description                        | Target     |
+| ------------------------- | ---------------------------------- | ---------- |
+| **GA Accuracy**           | Mean Absolute Error (AI vs Expert) | ≤1–2 weeks |
+| **Presentation Accuracy** | Cephalic vs Breech classification  | >95%       |
+| **Placenta Segmentation** | Dice Similarity Coefficient        | ≥0.90      |
+| **Fetal Count Detection** | True Positive Rate                 | >95%       |
+| **Runtime Efficiency**    | On-device inference                | <2 minutes |
+| **Usability**             | Error rate during use by midwives  | <5%        |
+
+A **pilot study** is planned where midwives use Natalis on volunteers, comparing AI results with expert sonographers to measure **agreement rate** and **usability feedback**.
+
+---
+
+## 📈 **Next Work Plan**
+
+1. Expand dataset with more diverse and labeled ultrasound data.
+2. Fine-tune CNN, U-Net, and YOLOv5 models iteratively.
+3. Design and implement the Android UI/UX with real-time feedback.
+4. Conduct field trials and collect validation metrics.
+5. Integrate risk prediction for maternal conditions like **IUGR** and **preeclampsia** in future updates.
+
+---
+
+## 🔒 **Constraints**
+
+* Must function **offline** with **minimal training (<3 minutes)** for health workers.
+* Must operate under **low-power** and **low-storage** environments.
+* Must be **cost-effective**, reproducible, and compatible with existing portable ultrasound probes.
+
+---
+
+## 💬 **Conclusion**
+
+**Natalis** represents a paradigm shift in maternal health technology.
+It combines **AI-driven image interpretation**, **smartphone accessibility**, and **offline functionality** to deliver expert-level prenatal diagnostics at the community level.
+
+By empowering **midwives and primary health workers** with intelligent tools, Natalis:
+
+* Expands access to WHO-recommended antenatal ultrasound screening.
+* Detects high-risk pregnancies earlier.
+* Reduces preventable maternal and neonatal mortality.
+* Creates a scalable and sustainable solution for the **Global South**.
+
+If fully deployed, Natalis could transform rural prenatal care by making **AI-assisted ultrasound** a **universal right** rather than a **hospital privilege**.
+
+---
+
+natalis-context

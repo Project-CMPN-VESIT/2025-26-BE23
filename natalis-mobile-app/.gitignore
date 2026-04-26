@@ -1,0 +1,82 @@
+# ----------------------------
+# Flutter/Dart/Pub
+# ----------------------------
+
+.env
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+pubspec.lock
+
+# Generated docs
+**/doc/api/
+
+# ----------------------------
+# Android
+# ----------------------------
+/android/.gradle/
+android/app/*.iml
+/android/app/debug/
+android/app/profile/
+android/app/release/
+
+# ----------------------------
+# iOS
+# ----------------------------
+/ios/Pods/
+/ios/Flutter/App.framework
+/ios/Flutter/Flutter.framework
+/ios/Flutter/engine
+/ios/Flutter/flutter_assets
+/ios/.symlinks/
+/ios/Runner.xcworkspace/
+/ios/Runner/GeneratedPluginRegistrant.*
+
+# ----------------------------
+# macOS
+# ----------------------------
+/macos/Flutter/ephemeral/
+/macos/Pods/
+
+# ----------------------------
+# Linux
+# ----------------------------
+/linux/flutter/ephemeral/
+
+# ----------------------------
+# Windows
+# ----------------------------
+/windows/flutter/ephemeral/
+
+# ----------------------------
+# IDE / Editor
+# ----------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+
+# ----------------------------
+# Misc
+# ----------------------------
+.DS_Store
+*.class
+*.log
+*.pyc
+*.pem
+*.keystore
+secrets.json
+
+# ----------------------------
+# Build artifacts
+# ----------------------------
+*.apk
+*.aab
+*.app
+*.ipa
