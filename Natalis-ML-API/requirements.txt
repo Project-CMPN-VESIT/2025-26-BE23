@@ -1,0 +1,15 @@
+flask
+numpy
+pillow
+torch
+torchvision
+openpyxl
+pandas
+scipy
+opencv-python-headless
+matplotlib
+segmentation-models-pytorch
+scikit-image
+gunicorn
+torch
+torchvision
